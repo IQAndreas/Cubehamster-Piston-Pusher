@@ -1,0 +1,13 @@
+# Ignore MineCraft texture pack (included locally for easy access)
+assets/texturepack/
+
+# Build and Release Folders
+bin/
+bin-debug/
+bin-release/
+
+# Project property files
+.actionScriptProperties
+.flexProperties
+.settings/
+.project
