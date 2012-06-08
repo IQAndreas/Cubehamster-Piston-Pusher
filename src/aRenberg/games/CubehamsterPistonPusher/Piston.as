@@ -20,6 +20,40 @@ package aRenberg.games.CubehamsterPistonPusher
 		public var sticky:Boolean;
 		public var increasesCounter:Boolean = true;
 		private var _extended:Boolean;
+			
+		override protected function onUpdate():void 
+		{
+			if (adjacentTileIsPowered())
+			{
+				this.extended = true;
+			}
+			else
+			{
+				this.extended = false;
+			}
+		}
+		
+		private function adjacentTileIsPowered():Boolean
+		{
+			return tileIsPowered(GridLocation.UP)
+				||	tileIsPowered(GridLocation.DOWN)
+				||	tileIsPowered(GridLocation.LEFT)
+				||	tileIsPowered(GridLocation.RIGHT);
+		}
+		
+		private function tileIsPowered(side:int):Boolean
+		{
+			var location:GridLocation = this.getLocation().getByID(side);
+			var redstoneTorch:Redstone = location ? location.getTile() as Redstone : null;
+			if (redstoneTorch)
+			{
+				return redstoneTorch.powered;
+			}
+			else
+			{
+				return false;
+			}
+		}
 		
 		public function get extended():Boolean
 		{ return _extended; }

@@ -27,23 +27,15 @@ package aRenberg.games.CubehamsterPistonPusher
 			this.powered = !this.powered;
 		}
 		
-		private function updatePower():void
-		{
-			updatePowerTo(GridLocation.UP);
-			updatePowerTo(GridLocation.DOWN);
-			updatePowerTo(GridLocation.LEFT);
-			updatePowerTo(GridLocation.RIGHT);
-		}
-		
-		private function updatePowerTo(side:int):void
+		private function updateAdjacentTile(side:int):void
 		{
 			var location:GridLocation = this.getLocation().getByID(side);
 			if (location)
 			{
-				var piston:Piston = location.getTile() as Piston;
-				if (piston)
+				var tile:Tile = location.getTile();
+				if (tile)
 				{
-					piston.extended = this.powered;
+					tile.update();
 				}
 			}
 		}
@@ -63,7 +55,11 @@ package aRenberg.games.CubehamsterPistonPusher
 				this.tileType = TileType.torchOff;
 			}
 			
-			this.updatePower();
+			// Update all surrounding tiles
+			updateAdjacentTile(GridLocation.UP);
+			updateAdjacentTile(GridLocation.DOWN);
+			updateAdjacentTile(GridLocation.LEFT);
+			updateAdjacentTile(GridLocation.RIGHT);
 		}
 	}
 }

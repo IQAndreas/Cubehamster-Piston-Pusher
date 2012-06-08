@@ -37,10 +37,21 @@ package aRenberg.games.CubehamsterPistonPusher
 			
 			this.redraw();
 			grid.container.addChild(this);
+			
+			this.update();
 		}
 		
 		public var grid:Grid;
 		
+		public final function update():void
+		{
+			this.onUpdate();
+		}
+		
+		protected function onUpdate():void
+		{
+			//Override me plz...
+		}
 		
 		private var _tileType:TileType;
 		public function get tileType():TileType
